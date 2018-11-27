@@ -1,8 +1,37 @@
 package Base;
 
-public class Executor extends Employee {
+import java.util.Scanner;
+
+public class Executor extends Employee implements Drive {
     public Executor(String name, String surname, String password){
         super(name, surname, password);
 
-    };
+    }
+    public static boolean login (){
+        Scanner reader = new Scanner(System.in);
+        while (true){
+
+            System.out.println("Enter user ID: \n");
+            int id = reader.nextInt();
+            System.out.println("Enter password: \n");
+            String password = reader.next();
+            if (Storage.executors.get(id)!=null){
+                System.out.println("not null");
+                if (password.equals((Storage.executors.get(id)).password))
+                    return Storage.executors.get(id).drive();
+            }
+            System.out.println("Incorrect login or password. \n 1) Try again \n 2)Return back \n 3) Exit");
+            String s = reader.next();
+            if (s.equals("2")) {
+                return false;
+            }
+            else if (s.equals("3"))
+                return true;
+        }
+    }
+
+    @Override
+    public boolean drive() {
+        return false;
+    }
 }

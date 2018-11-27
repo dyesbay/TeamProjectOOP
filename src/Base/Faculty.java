@@ -4,5 +4,6 @@ public enum Faculty {
     FIT,
     BS,
     KMA,
-    MCM
+    MCM,
+    NOT_SET
 }

@@ -6,5 +6,6 @@ public enum YearOfStudy {
     BACHELOR_3,
     BACHELOR_4,
     MASTER_1,
-    MASTER_2
+    MASTER_2,
+    NOT_SET
 }
