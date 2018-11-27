@@ -1,5 +1,6 @@
 package Base;
 
+import java.util.ArrayList;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
@@ -14,6 +15,6 @@ public class Storage {
     static protected SortedMap<Integer,Manager> managers = new TreeMap<>();
     static protected SortedMap<Integer,Course> activeCourses = new TreeMap<>();
     static protected SortedMap<Integer,Course> pendingCourses = new TreeMap<>();
-    static protected SortedMap<Integer,Order> pendingOrders = new TreeMap<>();
-    static protected SortedMap<Integer,Order> doneOrders = new TreeMap<>();
+    static protected ArrayList<Order> pendingOrders = new ArrayList<>();
+    static protected ArrayList<Order> doneOrders = new ArrayList<>();
 }

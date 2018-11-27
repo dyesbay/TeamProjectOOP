@@ -1,33 +1,27 @@
 package Base;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.TreeMap;
 
-public class Course {
+public class Course implements Serializable {
     private String name;
     private String description;
     private int id;
-    protected int numOfStudents;
+    protected int numOfStudents=0;
     private Faculty faculty;
     protected YearOfStudy yearOfStudy;
     private Teacher teacher;
     protected ArrayList<Student> students = new ArrayList<Student>();
     protected ArrayList<CourseFile> courseFiles = new ArrayList<>();
     protected ArrayList<Mark> marks;
-    public Course(String name, String description){
+
+    public Course(String name, String description, Teacher teacher){
         this.name=name;
         this.description=description;
         this.faculty=Faculty.NOT_SET;
         this.yearOfStudy=YearOfStudy.NOT_SET;
-        id = Storage.currCourseID++;
-        Storage.pendingCourses.put(id,this);
-    }
-
-    public Course(String name, String description, Faculty faculty, Teacher teacher){
-        this.name=name;
-        this.description=description;
-        this.faculty=faculty;
         this.teacher=teacher;
         id = Storage.currCourseID++;
         Storage.activeCourses.put(id,this);
@@ -104,12 +98,8 @@ public class Course {
     }
     @Override
     public String toString (){
-        String toString = "Course name: " + name + ".\n";
+        return " Course name: " + name + "\n Teacher: " + teacher.getName() + " " + teacher.getSurname() + ". \n Number of students: " + numOfStudents + ".\n Course description: " + description ;
 
-        toString+="Teacher: " + teacher.getName() + " " + teacher.getSurname() + ".\n";
-        toString+="Number of students: " + numOfStudents + ".\n";
-        toString+="Course description: " + description + ".\n";
-        return toString;
     }
 
     public boolean equals(Course course) {

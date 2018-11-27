@@ -12,7 +12,7 @@ public class Driver {
 
         boolean end = false;
         while (!end) {
-            System.out.println("Welcome to intranet. \n Login as: \n 1)Admin \n 2)Manager\n 3)Teacher  \n 4)Executor  \n 5) Student ");
+            System.out.println("Welcome to intranet. \n Login as: \n 1) Admin \n 2) Manager\n 3) Teacher  \n 4) Executor  \n 5) Student ");
             String s = reader.next();
             switch (s) {
                 case "1":

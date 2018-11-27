@@ -1,6 +1,8 @@
 package Base;
 
-public class CourseFile {
+import java.io.Serializable;
+
+public class CourseFile implements Serializable {
     private String name;
     public CourseFile (String name){
         this.name = name;

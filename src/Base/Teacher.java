@@ -1,10 +1,11 @@
 package Base;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
 
-public class Teacher extends Employee implements Drive {
+public class Teacher extends Employee implements Drive, Serializable {
     private Title title;
     private ArrayList<Course> courses= new ArrayList<Course>();
 
@@ -79,7 +80,7 @@ public class Teacher extends Employee implements Drive {
         String name = Driver.reader.next();
         System.out.println("Give a course description:");
         String description = Driver.reader.next();
-        courses.add(new Course(name, description));
+        courses.add(new Course(name, description, this));
         System.out.println("Course added!");
 
     }
@@ -93,7 +94,7 @@ public class Teacher extends Employee implements Drive {
             Scanner reader = new Scanner(System.in);
             int n = reader.nextInt();
             if (n <= courses.size()) {
-                courses.get(n).manage();
+                courses.get(n-1).manage();
             }
             else break;
         }
@@ -107,7 +108,7 @@ public class Teacher extends Employee implements Drive {
             System.out.println((courses.size() + 1) + ") Back");
             int n = Driver.reader.nextInt();
             if (n <= courses.size()) {
-                courses.get(n).showStudents();
+                courses.get(n-1).showStudents();
             }
             else break;
         }
@@ -117,7 +118,7 @@ public class Teacher extends Employee implements Drive {
         String subject = Driver.reader.next();
         System.out.println("Enter your order:");
         String text = Driver.reader.next();
-        new Order(subject, text);
+        Storage.pendingOrders.add(new Order(this,subject, text));
         System.out.println("Order sent!");
 
     }

@@ -1,8 +1,9 @@
 package Base;
 
+import java.io.Serializable;
 import java.util.Scanner;
 
-public abstract class User {
+public abstract class User implements Serializable {
     protected String name;
     protected String surname;
     protected int id;

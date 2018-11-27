@@ -1,10 +1,11 @@
 package Base;
 
+import java.io.Serializable;
 import java.util.Scanner;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
-public class Admin extends Employee implements Drive {
+public class Admin extends Employee implements Drive, Serializable {
     public Admin (String name, String surname, String password){
         super(name, surname, password);
 //        id=Storage.currID++;
@@ -20,9 +21,9 @@ public class Admin extends Employee implements Drive {
         System.out.println("Enter surname");
         String surname = reader.next();
         if (k==1)
-            new Admin(name,surname,password);
+            new Admin(name,surname,Driver.defaultPassword);
         if (k==2)
-            new Manager(name,surname,password);
+            new Manager(name,surname,Driver.defaultPassword);
 
         if (k==3){
             System.out.println("Enter title: \n 1) Tutor \n 2) Lector \n 3) Senior Lector \n 4) Professor");
@@ -39,7 +40,7 @@ public class Admin extends Employee implements Drive {
             new Teacher(name, surname, Driver.defaultPassword, title);
         }
         if (k==4)
-            new Admin(name,surname,password);
+            new Executor(name,surname,Driver.defaultPassword);
 
         if (k==5){
             System.out.println("Enter faculty: \n 1) FIT \n 2) BS \n 3) KMA \n 4) MCM");
