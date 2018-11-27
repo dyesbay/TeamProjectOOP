@@ -6,16 +6,13 @@ import java.util.TreeMap;
 
 public class Teacher extends Employee implements Info{
     private Title title;
-    private String id;
     private ArrayList<Course> courses= new ArrayList<Course>();
-    static private int currID;
-    static protected TreeMap<String,Teacher> teachersList = new TreeMap<>();
 
-    public Teacher (String name, String surname, Title title){
-        super(name, surname);
+    public Teacher (String name, String surname, String password, Title title){
+        super(name, surname, password);
         this.title= title;
-        id="tchr"+currID;
-        currID++;
+        id=Storage.currID++;
+        Storage.teachers.put(id,this);
     }
     public void addCourse(String courseName, Faculty faculty){
         courses.add(new Course(courseName,faculty,this));
@@ -26,12 +23,19 @@ public class Teacher extends Employee implements Info{
         else System.out.println("You have no access to this course.");
     }
     public static Teacher get(String id){
-        return teachersList.get(id);
+        return Storage.teachers.get(id);
     }
 
 
     @Override
     public void showInfo() {
 
+    }
+
+    public void setTitle(Title title){
+        this.title=title;
+    }
+    public Title getTitle (){
+        return title;
     }
 }
