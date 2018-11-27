@@ -1,9 +1,11 @@
 package Base;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Scanner;
 
-public class Student extends User implements Drive {
+public class Student extends User implements Drive, Serializable {
 
     private YearOfStudy yearOfStudy;
     private Faculty faculty;
@@ -16,13 +18,32 @@ public class Student extends User implements Drive {
         id = Storage.currID++;
         Storage.students.put(id,this);
     }
-    public void enroll (Course course){
-        if ( !course.students.contains(this) && (course.yearOfStudy == null || course.yearOfStudy==this.yearOfStudy) ) {
-            course.students.add(this);
-            courses.add(course);
-            course.numOfStudents++;
+    public void register (){
+        ArrayList<Course> courseArrayList = new ArrayList<>();
+        for (Map.Entry<Integer,Course> entry : Storage.activeCourses.entrySet()){
+            if (this.faculty==entry.getValue().getFaculty() && this.yearOfStudy==entry.getValue().getYearOfStudy())
+                courseArrayList.add(entry.getValue());
         }
-        else System.out.println("You are not allowed in this course");
+        while (true) {
+            for (int j = 0; j < courseArrayList.size(); j++) {
+                System.out.println((j + 1) + ") " + courseArrayList.get(j).getName());
+            }
+            System.out.println((courseArrayList.size() + 1) + ") Back");
+            int n = Driver.reader.nextInt();
+            n--;
+            if (n < courseArrayList.size()) {
+                System.out.println(courseArrayList.get(n) + "\n1) Register for course \n2)Back");
+                int k = Driver.reader.nextInt();
+                if (k==1) {
+                    courses.add(courseArrayList.get(n));
+                    courseArrayList.get(n).students.add(this);
+                    break;
+                }
+
+
+            }
+            else break;
+        }
     }
     public static Student get (int id){
         return Storage.students.get(id);
@@ -52,7 +73,32 @@ public class Student extends User implements Drive {
 
     @Override
     public boolean drive() {
-        return false;
+        while (true) {
+            System.out.println("Hello, " + this.name + "! You are logged in as teacher. \n 1) Add course \n 2) View courses \n 3) View students \n 4) Send order \n  5) Change password \n 6) Logout \n 7) Exit ");
+            int n = Driver.reader.nextInt();
+            switch (n) {
+                case 1:
+                    register();
+                    break;
+                case 2:
+
+                    break;
+                case 3:
+
+                    break;
+                case 4:
+
+                    break;
+                case 5:
+                    changePassword();
+                    break;
+                case 6:
+                    return false;
+                case 7:
+                    return true;
+
+            }
+        }
     }
 
     public void setFaculty(Faculty faculty) {

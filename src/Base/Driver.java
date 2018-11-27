@@ -3,8 +3,10 @@ package Base;
 import java.util.Scanner;
 import java.util.SortedMap;
 import java.util.TreeMap;
+import java.io.*;
 
 public class Driver {
+    Storage storage = new Storage();
     public static Scanner reader = new Scanner(System.in);
 
     protected static String defaultPassword = "12345";
@@ -38,7 +40,37 @@ public class Driver {
 
     }
     public static void main (String[] args){
-        User user = new Admin("dias", "yesbay", "asd");
+        try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream("person.dat")))
+        {
+            NonStaticStorage nonStaticStorage=(NonStaticStorage) ois.readObject();
+            Storage.currID = nonStaticStorage.currID;
+            Storage.currCourseID = nonStaticStorage.currCourseID;
+            Storage.currOrderID = nonStaticStorage.currOrderID;
+            Storage.students =  nonStaticStorage.students;
+            Storage.teachers = nonStaticStorage.teachers;
+            Storage.executors = nonStaticStorage.executors;
+            Storage.admins = nonStaticStorage.admins;
+            Storage.managers = nonStaticStorage.managers;
+            Storage.activeCourses = nonStaticStorage.activeCourses;
+            Storage.pendingCourses = nonStaticStorage.pendingCourses;
+            Storage.pendingOrders = nonStaticStorage.pendingOrders;
+            Storage.doneOrders = nonStaticStorage.doneOrders;
+        }
+        catch(Exception ex){
+
+            System.out.println(ex.getMessage());
+        }
+//        User user = new Admin("dias", "yesbay", "asd");
         startPage();
+
+        try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("person.dat")))
+        {
+            NonStaticStorage nonStaticStorage = new NonStaticStorage();
+            oos.writeObject(nonStaticStorage);
+        }
+        catch(Exception ex){
+
+            System.out.println(ex.getMessage());
+        }
     }
 }

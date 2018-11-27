@@ -29,7 +29,6 @@ public class Teacher extends Employee implements Drive, Serializable {
             System.out.println("Enter password: \n");
             String password = Driver.reader.next();
             if (Storage.teachers.get(id)!=null){
-                System.out.println("not null");
                 if (password.equals((Storage.teachers.get(id)).password))
                     return Storage.teachers.get(id).drive();
             }

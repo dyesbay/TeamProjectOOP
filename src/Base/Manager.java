@@ -1,13 +1,10 @@
 package Base;
 
-import java.io.Serializable;
 import java.util.*;
 
-public class Manager extends Employee implements Drive, Serializable {
+public class Manager extends Employee implements Drive {
     public Manager (String name, String surname, String password){
         super(name, surname, password);
-        id=Storage.currID++;
-        Storage.managers.put(id, this);
     }
     public static boolean login (){
         Scanner reader = new Scanner(System.in);
@@ -35,18 +32,18 @@ public class Manager extends Employee implements Drive, Serializable {
     @Override
     public boolean drive() {
         while(true){
-            System.out.println("Hello, " + name + ". You are logged in as manager. \n 1) Add course for registration \n 2) Change password \n 3) Logout \n 4) Exit ");
+            System.out.println("Hello, " + name + ". You are logged in as manager. \n 1) Add course for registration \n 2) Remove user  \n 3) Change password \n 4) Logout \n 5) Exit ");
 
 
             Scanner reader = new Scanner(System.in);
             int n = reader.nextInt();
             if (n==1)
                 addCourse();
-            if (n==2)
-                changePassword();
             if (n==3)
-                return false;
+                changePassword();
             if (n==4)
+                return false;
+            if (n==5)
                 return true;
         }
     }
