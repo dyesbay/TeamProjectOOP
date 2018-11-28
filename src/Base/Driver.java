@@ -55,18 +55,22 @@ public class Driver {
             Storage.pendingCourses = nonStaticStorage.pendingCourses;
             Storage.pendingOrders = nonStaticStorage.pendingOrders;
             Storage.doneOrders = nonStaticStorage.doneOrders;
+
+            ois.close();
         }
         catch(Exception ex){
 
             System.out.println(ex.getMessage());
         }
-//        User user = new Admin("dias", "yesbay", "asd");
+        Admin user = new Admin("dias", "yesbay", "asd");
+        ( user).showUsers();
         startPage();
 
         try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("person.dat")))
         {
             NonStaticStorage nonStaticStorage = new NonStaticStorage();
             oos.writeObject(nonStaticStorage);
+            oos.flush();
         }
         catch(Exception ex){
 

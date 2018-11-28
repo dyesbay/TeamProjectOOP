@@ -5,6 +5,8 @@ import java.util.*;
 public class Manager extends Employee implements Drive {
     public Manager (String name, String surname, String password){
         super(name, surname, password);
+        id=Storage.currID++;
+        Storage.managers.put(id,this);
     }
     public static boolean login (){
         Scanner reader = new Scanner(System.in);

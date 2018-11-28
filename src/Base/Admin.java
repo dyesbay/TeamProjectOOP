@@ -1,6 +1,7 @@
 package Base;
 
 import java.io.Serializable;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.SortedMap;
 import java.util.TreeMap;
@@ -101,7 +102,7 @@ public class Admin extends Employee implements Drive, Serializable {
     public boolean drive(){
 
         while(true){
-            System.out.println("You are logged in as admin. \n 1) Add user \n 2) Remove user  \n 3) Change password \n 4) Logout \n 5) Exit ");
+            System.out.println("You are logged in as admin. \n 1) Add user \n 2) Remove user  \n 3) Change password \n 4) Logout \n 5) Exit \n 6) Show users ");
 
 
             Scanner reader = new Scanner(System.in);
@@ -114,6 +115,31 @@ public class Admin extends Employee implements Drive, Serializable {
                 return false;
             if (n==5)
                 return true;
+            if (n==6){
+                showUsers();
+            }
+        }
+    }
+    public void showUsers(){
+        System.out.println("Admins:");
+        for (Map.Entry<Integer,Admin> entry: Storage.admins.entrySet()){
+            System.out.println(entry.getKey() + " " + entry.getValue().getName() + " " + entry.getValue().getSurname());
+        }
+        System.out.println("Managers:");
+        for (Map.Entry<Integer,Manager> entry: Storage.managers.entrySet()){
+            System.out.println(entry.getKey() + " " + entry.getValue().getName() + " " + entry.getValue().getSurname());
+        }
+        System.out.println("Teachers:");
+        for (Map.Entry<Integer,Teacher> entry: Storage.teachers.entrySet()){
+            System.out.println(entry.getKey() + " " + entry.getValue().getName() + " " + entry.getValue().getSurname());
+        }
+        System.out.println("Executors:");
+        for (Map.Entry<Integer,Executor> entry: Storage.executors.entrySet()){
+            System.out.println(entry.getKey() + " " + entry.getValue().getName() + " " + entry.getValue().getSurname());
+        }
+        System.out.println("Students:");
+        for (Map.Entry<Integer,Student> entry: Storage.students.entrySet()){
+            System.out.println(entry.getKey() + " " + entry.getValue().getName() + " " + entry.getValue().getSurname());
         }
     }
 
