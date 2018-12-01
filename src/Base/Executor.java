@@ -18,7 +18,6 @@ public class Executor extends Employee implements Drive, Serializable {
             System.out.println("Enter password: \n");
             String password = reader.next();
             if (Storage.executors.get(id)!=null){
-                System.out.println("not null");
                 if (password.equals((Storage.executors.get(id)).password))
                     return Storage.executors.get(id).drive();
             }

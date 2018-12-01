@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
-public class Storage  implements Serializable {
+public class Storage   {
     static protected int currID = 1;
     static protected int currCourseID = 1;
     static protected int currOrderID = 1;

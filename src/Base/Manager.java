@@ -17,7 +17,6 @@ public class Manager extends Employee implements Drive {
             System.out.println("Enter password: \n");
             String password = reader.next();
             if (Storage.managers.get(id)!=null){
-                System.out.println("not null");
                 if (password.equals((Storage.managers.get(id)).password))
                     return Storage.managers.get(id).drive();
             }
@@ -34,18 +33,18 @@ public class Manager extends Employee implements Drive {
     @Override
     public boolean drive() {
         while(true){
-            System.out.println("Hello, " + name + ". You are logged in as manager. \n 1) Add course for registration \n 2) Remove user  \n 3) Change password \n 4) Logout \n 5) Exit ");
+            System.out.println("Hello, " + name + ". You are logged in as manager. \n 1) Add course for registration \n   2) Change password \n 3) Logout \n 4) Exit ");
 
 
             Scanner reader = new Scanner(System.in);
             int n = reader.nextInt();
             if (n==1)
                 addCourse();
-            if (n==3)
+            if (n==2)
                 changePassword();
-            if (n==4)
+            if (n==3)
                 return false;
-            if (n==5)
+            if (n==4)
                 return true;
         }
     }
@@ -57,7 +56,8 @@ public class Manager extends Employee implements Drive {
         }
         System.out.println((arl.size() + 1) + ") Back");
         int n = Driver.reader.nextInt();
-        if (n <= arl.size()) {
+        n--;
+        if (n < arl.size()) {
             System.out.println("Enter faculty: \n 1) FIT \n 2) BS \n 3) KMA \n 4) MCM");
             int fac = Driver.reader.nextInt();
             Faculty faculty = Faculty.FIT;

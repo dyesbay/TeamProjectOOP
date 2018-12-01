@@ -15,10 +15,12 @@ public class Student extends User implements Drive, Serializable {
         this.surname = surname;
         this.yearOfStudy=yearOfStudy;
         this.faculty=faculty;
+        this.password=password;
         id = Storage.currID++;
         Storage.students.put(id,this);
     }
     public void register (){
+        System.out.println("Select subject: ");
         ArrayList<Course> courseArrayList = new ArrayList<>();
         for (Map.Entry<Integer,Course> entry : Storage.activeCourses.entrySet()){
             if (this.faculty==entry.getValue().getFaculty() && this.yearOfStudy==entry.getValue().getYearOfStudy())
@@ -37,10 +39,74 @@ public class Student extends User implements Drive, Serializable {
                 if (k==1) {
                     courses.add(courseArrayList.get(n));
                     courseArrayList.get(n).students.add(this);
+                    courseArrayList.get(n).numOfStudents++;
                     break;
                 }
 
 
+            }
+            else break;
+        }
+    }
+    public void viewMarks(){
+        while (true) {
+            for (int j = 0; j < courses.size(); j++) {
+                System.out.println((j + 1) + ") " + courses.get(j).getName());
+            }
+            System.out.println((courses.size() + 1) + ") Back");
+            int n = Driver.reader.nextInt();
+            n--;
+            if (n < courses.size()) {
+                Course course = courses.get(n);
+                System.out.println("Your marks for subject " + course.getName() + " are:");
+                for (Mark m : course.marks) {
+                    if (this == m.getStudent()) {
+                        System.out.println(m.getValue());
+                    }
+                }
+                System.out.println("1) Back");
+                int k = Driver.reader.nextInt();
+            }
+            else break;
+        }
+    }
+    public void viewFiles(){
+        while (true) {
+            for (int j = 0; j < courses.size(); j++) {
+                System.out.println((j + 1) + ") " + courses.get(j).getName());
+            }
+            System.out.println((courses.size() + 1) + ") Back");
+            int n = Driver.reader.nextInt();
+            n--;
+            if (n < courses.size()) {
+                Course course = courses.get(n);
+                System.out.println("Course files:");
+                for (int j = 0; j < course.courseFiles.size(); j++) {
+                    System.out.println((j + 1) + ") " + course.courseFiles.get(j).getName());
+                }
+                System.out.println("1) Back");
+                int k = Driver.reader.nextInt();
+                k--;
+                if(k<course.courseFiles.size()){
+                    course.courseFiles.get(k);
+                }
+            }
+            else break;
+        }
+    }
+    public void viewTeacher(){
+        while (true) {
+            for (int j = 0; j < courses.size(); j++) {
+                System.out.println((j + 1) + ") " + courses.get(j).getName());
+            }
+            System.out.println((courses.size() + 1) + ") Back");
+            int n = Driver.reader.nextInt();
+            n--;
+            if (n < courses.size()) {
+                Course course = courses.get(n);
+                System.out.println(course.getTeacher());
+                System.out.println("1) Back");
+                int k = Driver.reader.nextInt();
             }
             else break;
         }
@@ -57,7 +123,6 @@ public class Student extends User implements Drive, Serializable {
             System.out.println("Enter password: \n");
             String password = Driver.reader.next();
             if (Storage.students.get(id)!=null){
-                System.out.println("not null");
                 if (password.equals((Storage.students.get(id)).password))
                     return Storage.students.get(id).drive();
             }
@@ -74,20 +139,20 @@ public class Student extends User implements Drive, Serializable {
     @Override
     public boolean drive() {
         while (true) {
-            System.out.println("Hello, " + this.name + "! You are logged in as teacher. \n 1) Add course \n 2) View courses \n 3) View students \n 4) Send order \n  5) Change password \n 6) Logout \n 7) Exit ");
+            System.out.println("Hello, " + this.name + "! You are logged in as student. \n 1) Register for course \n 2) View marks \n 3) View files \n 4) View Teacher \n  5) Change password \n 6) Logout \n 7) Exit ");
             int n = Driver.reader.nextInt();
             switch (n) {
                 case 1:
                     register();
                     break;
                 case 2:
-
+                    viewMarks();
                     break;
                 case 3:
-
+                    viewFiles();
                     break;
                 case 4:
-
+                    viewTeacher();
                     break;
                 case 5:
                     changePassword();

@@ -11,5 +11,6 @@ public class CourseFile implements Serializable {
     public String getName() {
         return name;
     }
+    public void download(){};
 
 }

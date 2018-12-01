@@ -92,8 +92,9 @@ public class Teacher extends Employee implements Drive, Serializable {
             System.out.println((courses.size() + 1) + ") Back");
             Scanner reader = new Scanner(System.in);
             int n = reader.nextInt();
-            if (n <= courses.size()) {
-                courses.get(n-1).manage();
+            n--;
+            if (n < courses.size()) {
+                courses.get(n).manage();
             }
             else break;
         }
@@ -122,7 +123,10 @@ public class Teacher extends Employee implements Drive, Serializable {
 
     }
 
-
+    @Override
+    public String toString() {
+        return (title+super.toString());
+    }
 
     public void setTitle(Title title){
         this.title=title;

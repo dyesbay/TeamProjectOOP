@@ -23,8 +23,9 @@ public class Course implements Serializable {
         this.faculty=Faculty.NOT_SET;
         this.yearOfStudy=YearOfStudy.NOT_SET;
         this.teacher=teacher;
+        marks=new ArrayList<>();
         id = Storage.currCourseID++;
-        Storage.activeCourses.put(id,this);
+        Storage.pendingCourses.put(id,this);
     }
     public void manage (){
         boolean end = false;
@@ -75,7 +76,7 @@ public class Course implements Serializable {
         System.out.println((courseFiles.size() + 1) + ") Back");
         int n = Driver.reader.nextInt();
         if (n <= courseFiles.size()) {
-            courseFiles.remove(n);
+            courseFiles.remove(n-1);
             System.out.println("File deleted");
         }
 
@@ -87,7 +88,8 @@ public class Course implements Serializable {
         }
         System.out.println((students.size() + 1) + ") Back");
         int n = Driver.reader.nextInt();
-        if (n <= students.size()) {
+        n--;
+        if (n < students.size()) {
             System.out.println("Enter the mark: ");
             double value = Driver.reader.nextDouble();
             marks.add(new Mark(value,students.get(n), this));

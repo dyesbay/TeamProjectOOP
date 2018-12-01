@@ -85,7 +85,6 @@ public class Admin extends Employee implements Drive, Serializable {
             System.out.println("Enter password: \n");
             String password = reader.next();
             if (Storage.admins.get(id)!=null){
-                System.out.println("not null");
                 if (password.equals((Storage.admins.get(id)).password))
                     return Storage.admins.get(id).drive();
             }
@@ -102,7 +101,7 @@ public class Admin extends Employee implements Drive, Serializable {
     public boolean drive(){
 
         while(true){
-            System.out.println("You are logged in as admin. \n 1) Add user \n 2) Remove user  \n 3) Change password \n 4) Logout \n 5) Exit \n 6) Show users ");
+            System.out.println("You are logged in as admin. \n 1) Add user \n 2) Show users  \n 3) Change password \n 4) Logout \n 5) Exit  ");
 
 
             Scanner reader = new Scanner(System.in);
@@ -115,7 +114,7 @@ public class Admin extends Employee implements Drive, Serializable {
                 return false;
             if (n==5)
                 return true;
-            if (n==6){
+            if (n==2){
                 showUsers();
             }
         }
